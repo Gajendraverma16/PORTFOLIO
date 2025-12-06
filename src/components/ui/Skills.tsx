@@ -79,15 +79,15 @@ export default function Skills() {
               </div> */}
 
               {/* Category Title */}
-              <div className="relative z-10 mb-6">
-                <h3 className="text-xl md:text-2xl font-semibold text-black tracking-tight">
+              <div className="relative z-10 mb-8">
+                <h3 className="text-2xl md:text-3xl font-semibold text-black tracking-tight">
                   {category.category}
                 </h3>
-                <div className="w-12 h-[2px] bg-black mt-3"></div>
+                <div className="w-16 h-[2px] bg-black mt-4"></div>
               </div>
 
-              {/* Skills Grid */}
-              <div className="relative z-10 grid grid-cols-1 xs:grid-cols-2 gap-2 sm:gap-3">
+              {/* Skills Flex Wrap */}
+              <div className="relative z-10 flex flex-wrap gap-3">
                 {category.items.map((skill, index) => (
                   <motion.div
                     key={index}
@@ -95,7 +95,7 @@ export default function Skills() {
                     whileInView={{ opacity: 1, scale: 1 }}
                     viewport={{ once: true }}
                     transition={{ delay: index * 0.05, duration: 0.3 }}
-                    className="px-3 sm:px-4 py-2 sm:py-3 bg-black/5 rounded-lg sm:rounded-xl text-xs sm:text-sm md:text-base font-medium text-black/80 hover:bg-black hover:text-white transition-all duration-300 text-center"
+                    className="px-5 py-2.5 bg-black/10 text-black rounded-full text-sm font-medium hover:bg-black hover:text-white transition-all duration-300"
                   >
                     {skill}
                   </motion.div>

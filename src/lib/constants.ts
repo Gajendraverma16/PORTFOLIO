@@ -71,17 +71,17 @@ export const SKILLS = [
   {
     id: 1,
     category: 'Languages & Frameworks',
-    items: ['JAVA', 'JavaScript', 'React', 'Next.js', 'TypeScript', 'Node.js', 'Express.js','HTML'],
+    items: ['Java', 'JavaScript', 'React', 'Next.js', 'TypeScript', 'Node.js', 'Express.js', 'HTML'],
   },
   {
     id: 2,
-    category: 'Databases',
-    items: ['MongoDB','PostgreSQL', 'Prisma', 'Redis', 'React Query'],
+    category: 'Backend & Data',
+    items: ['MongoDB', 'PostgreSQL', 'Prisma', 'Redis', 'React Query'],
   },
   {
     id: 3,
     category: '3D & Graphics',
-    items: ['Three.js', 'React Three Fiber', 'WebGL', 'GSAP', 'Framer Motion'],
+    items: ['Three.js', 'React Three Fiber', 'WebGL', 'GSAP'],
   },
   {
     id: 4,
