@@ -180,7 +180,7 @@ export default function Hero() {
         <div className="overflow-hidden">
           <motion.h2
             variants={wordVariants}
-            className="text-3xl sm:text-5xl md:text-6xl lg:text-7xl font-light tracking-tighter text-black/80 italic leading-[1.1]"
+            className="text-3xl sm:text-5xl md:text-6xl lg:text-7xl font-light tracking-tighter text-black/80 italic leading-[1.1] mb-1"
           >
             & Web Designer.
           </motion.h2>

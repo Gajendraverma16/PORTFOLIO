@@ -1,15 +1,28 @@
 'use client';
 
+import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { SITE_CONFIG } from '@/lib/constants';
 
 export default function Footer() {
-  const currentTime = new Date().toLocaleTimeString('en-US', { 
-    hour: '2-digit', 
-    minute: '2-digit',
-    hour12: false,
-    timeZone: 'Asia/Kolkata'
-  });
+  const [currentTime, setCurrentTime] = useState('');
+
+  useEffect(() => {
+    const updateTime = () => {
+      const time = new Date().toLocaleTimeString('en-US', { 
+        hour: '2-digit', 
+        minute: '2-digit',
+        hour12: false,
+        timeZone: 'Asia/Kolkata'
+      });
+      setCurrentTime(time);
+    };
+
+    updateTime();
+    const interval = setInterval(updateTime, 1000);
+
+    return () => clearInterval(interval);
+  }, []);
 
   return (
     <footer className="relative z-10 bg-black text-white py-16 md:py-20 px-6 md:px-12 lg:px-16 overflow-hidden">
@@ -90,7 +103,7 @@ export default function Footer() {
               LOCAL TIME
             </h3>
             <p className="text-sm md:text-base text-white/70">
-              {currentTime} UTC+5:30
+              {currentTime || '--:--'} UTC+5:30
             </p>
           </div>
 
@@ -130,7 +143,7 @@ export default function Footer() {
           className="flex items-center justify-center mb-20"
         >
           <h2 className="text-[120px] md:text-[200px] lg:text-[280px] font-bold tracking-tighter leading-none text-white">
-            {SITE_CONFIG.shortName}
+            {SITE_CONFIG.shortName}.
           </h2>
         </motion.div>
 

@@ -6,10 +6,18 @@ import { motion } from 'framer-motion';
 export default function CustomCursor() {
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
   const [isHovering, setIsHovering] = useState(false);
+  const [isOnFooter, setIsOnFooter] = useState(false);
 
   useEffect(() => {
     const updateMousePosition = (e: MouseEvent) => {
       setMousePosition({ x: e.clientX, y: e.clientY });
+      
+      // Check if cursor is over footer
+      const element = document.elementFromPoint(e.clientX, e.clientY);
+      if (element) {
+        const footer = element.closest('footer');
+        setIsOnFooter(!!footer);
+      }
     };
 
     const handleMouseOver = (e: MouseEvent) => {
@@ -39,7 +47,9 @@ export default function CustomCursor() {
     <>
       {/* Main cursor dot */}
       <motion.div
-        className="fixed top-0 left-0 w-2 h-2 bg-black border-black rounded-full pointer-events-none z-[10000] hidden md:block"
+        className={`fixed top-0 left-0 w-2 h-2 rounded-full pointer-events-none z-[10000] hidden md:block ${
+          isOnFooter ? 'bg-white border-white' : 'bg-black border-black'
+        }`}
         animate={{
           x: mousePosition.x - 4,
           y: mousePosition.y - 4,
@@ -55,7 +65,9 @@ export default function CustomCursor() {
 
       {/* Cursor follower ring */}
       <motion.div
-        className="fixed top-0 left-0 w-8 h-8 border border-black rounded-full pointer-events-none z-[10000] hidden md:block"
+        className={`fixed top-0 left-0 w-8 h-8 border rounded-full pointer-events-none z-[10000] hidden md:block ${
+          isOnFooter ? 'border-white' : 'border-black'
+        }`}
         animate={{
           x: mousePosition.x - 16,
           y: mousePosition.y - 16,

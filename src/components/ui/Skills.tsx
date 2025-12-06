@@ -1,11 +1,33 @@
 'use client';
 
+import { useState } from 'react';
 import { motion } from 'framer-motion';
 import { SKILLS } from '@/lib/constants';
 
+const containerVariants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.1,
+    },
+  },
+};
+
+const itemVariants = {
+  hidden: { opacity: 0, y: 20 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.6, ease: [0.22, 1, 0.36, 1] as any },
+  },
+};
+
 export default function Skills() {
+  const [hoveredCategory, setHoveredCategory] = useState<number | null>(null);
+
   return (
-    <section id="skills" className="relative z-10 bg-[#f5f5f5] text-black py-20 md:py-32 px-6 md:px-12 lg:px-16">
+    <section id="skills" className="relative z-10 min-h-screen bg-[#f5f5f5] text-black py-20 md:py-32 px-6 md:px-12 lg:px-16">
       <div className="max-w-[1400px] mx-auto">
         
         {/* Section Title */}
@@ -14,45 +36,66 @@ export default function Skills() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.8 }}
-          className="text-center mb-16 md:mb-24"
+          className="mb-16 md:mb-24"
         >
-          <h2 className="text-5xl md:text-7xl lg:text-8xl font-medium tracking-tighter text-black mb-6">
-            Technology Arsenal
+          <div className="flex items-center gap-3 mb-4">
+            <span className="w-12 h-[1px] bg-black/30"></span>
+            <p className="text-xs md:text-sm font-medium tracking-widest uppercase text-black/60">
+              Technical Expertise
+            </p>
+          </div>
+          <h2 className="text-5xl md:text-7xl lg:text-8xl font-medium tracking-tighter text-black">
+            Skills & Tools
           </h2>
-          <p className="text-lg md:text-xl text-black/60 max-w-2xl mx-auto">
-            A comprehensive toolkit for building modern, scalable applications
-          </p>
         </motion.div>
 
-        {/* Skills Categories Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-16">
-          {SKILLS.map((category, categoryIndex) => (
+        {/* Skills Grid - Large Cards */}
+        <motion.div 
+          variants={containerVariants}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: "-100px" }}
+          className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8"
+        >
+          {SKILLS.map((category) => (
             <motion.div
               key={category.id}
-              initial={{ opacity: 0, y: 50 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: categoryIndex * 0.2, duration: 0.6 }}
+              variants={itemVariants}
+              onMouseEnter={() => setHoveredCategory(category.id)}
+              onMouseLeave={() => setHoveredCategory(null)}
+              className="group relative bg-white rounded-3xl p-8 md:p-12 border border-black/5 hover:border-black/10 transition-all duration-500 cursor-none overflow-hidden"
             >
-              {/* Category Title */}
-              <h3 className="text-2xl md:text-3xl font-semibold text-black mb-6">
-                {category.category}
-              </h3>
+              {/* Background Gradient on Hover */}
+              <motion.div
+                initial={{ opacity: 0 }}
+                animate={{ opacity: hoveredCategory === category.id ? 0.03 : 0 }}
+                transition={{ duration: 0.3 }}
+                className="absolute inset-0 bg-gradient-to-br from-black to-transparent"
+              />
 
-              {/* Skills Pills */}
-              <div className="flex flex-wrap gap-3">
-                {category.items.map((skill, skillIndex) => (
+              {/* Category Number */}
+              {/* <div className="absolute top-8 right-8 text-6xl md:text-7xl font-bold text-black/5 group-hover:text-black/10 transition-colors duration-500">
+                {String(category.id).padStart(2, '0')}
+              </div> */}
+
+              {/* Category Title */}
+              <div className="relative z-10 mb-8">
+                <h3 className="text-3xl md:text-4xl font-semibold text-black tracking-tight">
+                  {category.category}
+                </h3>
+                <div className="w-12 h-[2px] bg-black mt-4"></div>
+              </div>
+
+              {/* Skills Grid */}
+              <div className="relative z-10 grid grid-cols-2 gap-3">
+                {category.items.map((skill, index) => (
                   <motion.div
-                    key={skillIndex}
-                    initial={{ opacity: 0, scale: 0.8 }}
+                    key={index}
+                    initial={{ opacity: 0, scale: 0.9 }}
                     whileInView={{ opacity: 1, scale: 1 }}
                     viewport={{ once: true }}
-                    transition={{ 
-                      delay: categoryIndex * 0.2 + skillIndex * 0.05,
-                      duration: 0.4 
-                    }}
-                    whileHover={{ scale: 1.05, y: -2 }}
-                    className="px-5 py-2.5 bg-white text-black rounded-full text-sm md:text-base font-medium border border-black/10 hover:bg-black hover:text-white hover:border-black hover:shadow-lg transition-all duration-300 cursor-none"
+                    transition={{ delay: index * 0.05, duration: 0.3 }}
+                    className="px-4 py-3 bg-black/5 rounded-xl text-sm md:text-base font-medium text-black/80 hover:bg-black hover:text-white transition-all duration-300 text-center"
                   >
                     {skill}
                   </motion.div>
@@ -60,7 +103,7 @@ export default function Skills() {
               </div>
             </motion.div>
           ))}
-        </div>
+        </motion.div>
       </div>
     </section>
   );

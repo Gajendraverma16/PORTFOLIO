@@ -10,10 +10,10 @@ export default function Contact() {
     email: '',
     message: '',
   });
+  const [hoveredInput, setHoveredInput] = useState<string | null>(null);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    // Add your form submission logic here
     console.log('Form submitted:', formData);
     alert('Message sent! I will get back to you soon.');
     setFormData({ name: '', email: '', message: '' });
@@ -27,10 +27,29 @@ export default function Contact() {
   };
 
   return (
-    <section id="contact" className="relative z-10 bg-[#f5f5f5] text-black py-20 md:py-32 px-6 md:px-12 lg:px-16">
+    <section id="contact" className="relative z-10 min-h-screen bg-white text-black py-20 md:py-32 px-6 md:px-12 lg:px-16">
       <div className="max-w-[1400px] mx-auto">
         
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 md:gap-16">
+        {/* Section Title */}
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.8 }}
+          className="mb-16 md:mb-24"
+        >
+          <div className="flex items-center gap-3 mb-4">
+            <span className="w-12 h-[1px] bg-black/30"></span>
+            <p className="text-xs md:text-sm font-medium tracking-widest uppercase text-black/60">
+              Get In Touch
+            </p>
+          </div>
+          <h2 className="text-5xl md:text-7xl lg:text-8xl font-medium tracking-tighter text-black">
+            Let's Work Together
+          </h2>
+        </motion.div>
+
+        <div className="grid grid-cols-1 lg:grid-cols-5 gap-12 md:gap-16">
           
           {/* Left - Contact Info */}
           <motion.div
@@ -38,48 +57,38 @@ export default function Contact() {
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.8 }}
+            className="lg:col-span-2 space-y-8"
           >
-            <div className="flex items-center gap-3 mb-6">
-              <span className="w-12 h-[1px] bg-black/30"></span>
-              <p className="text-xs md:text-sm font-medium tracking-widest uppercase text-black/60">
-                Get In Touch
-              </p>
-            </div>
-            
-            <h2 className="text-4xl md:text-6xl lg:text-7xl font-medium tracking-tighter text-black mb-8">
-              Let's Work Together
-            </h2>
-            
-            <p className="text-base md:text-lg text-black/70 leading-relaxed mb-12">
+            <p className="text-lg md:text-xl text-black/70 leading-relaxed">
               Have a project in mind? Let's discuss how I can help bring your ideas to life 
               with modern web technologies.
             </p>
 
             {/* Contact Details */}
-            <div className="space-y-6">
+            <div className="space-y-6 pt-8 border-t border-black/10">
               <div>
-                <h3 className="text-sm font-medium text-black/60 mb-2">Email</h3>
+                <h3 className="text-sm font-medium text-black/40 mb-2 uppercase tracking-wider">Email</h3>
                 <a 
                   href={`mailto:${SITE_CONFIG.email}`}
-                  className="text-lg md:text-xl text-black hover:underline"
+                  className="text-xl md:text-2xl text-black hover:underline font-medium"
                 >
                   {SITE_CONFIG.email}
                 </a>
               </div>
               
               <div>
-                <h3 className="text-sm font-medium text-black/60 mb-2">Phone</h3>
+                <h3 className="text-sm font-medium text-black/40 mb-2 uppercase tracking-wider">Phone</h3>
                 <a 
                   href={`tel:${SITE_CONFIG.phone}`}
-                  className="text-lg md:text-xl text-black hover:underline"
+                  className="text-xl md:text-2xl text-black hover:underline font-medium"
                 >
                   +91 {SITE_CONFIG.phone}
                 </a>
               </div>
               
               <div>
-                <h3 className="text-sm font-medium text-black/60 mb-2">Location</h3>
-                <p className="text-lg md:text-xl text-black">
+                <h3 className="text-sm font-medium text-black/40 mb-2 uppercase tracking-wider">Location</h3>
+                <p className="text-xl md:text-2xl text-black font-medium">
                   {SITE_CONFIG.location}
                 </p>
               </div>
@@ -92,53 +101,51 @@ export default function Contact() {
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.8 }}
+            className="lg:col-span-3"
           >
             <form onSubmit={handleSubmit} className="space-y-6">
               <div>
-                <label htmlFor="name" className="block text-sm font-medium text-black/60 mb-2">
-                  Name
-                </label>
                 <input
                   type="text"
                   id="name"
                   name="name"
                   value={formData.name}
                   onChange={handleChange}
+                  onFocus={() => setHoveredInput('name')}
+                  onBlur={() => setHoveredInput(null)}
                   required
-                  className="w-full px-6 py-4 bg-white border border-black/10 rounded-2xl text-black focus:outline-none focus:border-black transition-colors duration-300"
                   placeholder="Your name"
+                  className="w-full px-0 py-4 bg-transparent border-b-2 border-black/10 text-black text-lg focus:outline-none focus:border-black transition-colors duration-300 placeholder:text-black/40"
                 />
               </div>
 
               <div>
-                <label htmlFor="email" className="block text-sm font-medium text-black/60 mb-2">
-                  Email
-                </label>
                 <input
                   type="email"
                   id="email"
                   name="email"
                   value={formData.email}
                   onChange={handleChange}
+                  onFocus={() => setHoveredInput('email')}
+                  onBlur={() => setHoveredInput(null)}
                   required
-                  className="w-full px-6 py-4 bg-white border border-black/10 rounded-2xl text-black focus:outline-none focus:border-black transition-colors duration-300"
                   placeholder="your@email.com"
+                  className="w-full px-0 py-4 bg-transparent border-b-2 border-black/10 text-black text-lg focus:outline-none focus:border-black transition-colors duration-300 placeholder:text-black/40"
                 />
               </div>
 
               <div>
-                <label htmlFor="message" className="block text-sm font-medium text-black/60 mb-2">
-                  Message
-                </label>
                 <textarea
                   id="message"
                   name="message"
                   value={formData.message}
                   onChange={handleChange}
+                  onFocus={() => setHoveredInput('message')}
+                  onBlur={() => setHoveredInput(null)}
                   required
-                  rows={6}
-                  className="w-full px-6 py-4 bg-white border border-black/10 rounded-2xl text-black focus:outline-none focus:border-black transition-colors duration-300 resize-none"
+                  rows={4}
                   placeholder="Tell me about your project..."
+                  className="w-full px-0 py-4 bg-transparent border-b-2 border-black/10 text-black text-lg focus:outline-none focus:border-black transition-colors duration-300 resize-none placeholder:text-black/40"
                 />
               </div>
 
@@ -146,9 +153,18 @@ export default function Contact() {
                 type="submit"
                 whileHover={{ scale: 1.02 }}
                 whileTap={{ scale: 0.98 }}
-                className="w-full px-8 py-4 bg-black text-white rounded-full text-base md:text-lg font-medium hover:bg-black/90 transition-colors duration-300"
+                className="group relative px-12 py-5 bg-black text-white rounded-full text-base md:text-lg font-medium overflow-hidden cursor-none"
               >
-                Send Message
+                <span className="relative z-10">Send Message</span>
+                <motion.div
+                  className="absolute inset-0 bg-white"
+                  initial={{ x: '-100%' }}
+                  whileHover={{ x: 0 }}
+                  transition={{ duration: 0.3 }}
+                />
+                <span className="absolute inset-0 flex items-center justify-center text-black opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-20">
+                  Send Message
+                </span>
               </motion.button>
             </form>
           </motion.div>

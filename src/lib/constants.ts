@@ -71,21 +71,21 @@ export const SKILLS = [
   {
     id: 1,
     category: 'Languages & Frameworks',
-    items: ['TypeScript', 'JavaScript', 'React', 'Next.js', 'Node.js', 'Express.js', 'Fastify'],
+    items: ['JAVA', 'JavaScript', 'React', 'Next.js', 'TypeScript', 'Node.js', 'Express.js','HTML'],
   },
   {
     id: 2,
-    category: 'Databases & State',
-    items: ['PostgreSQL', 'MongoDB', 'Prisma', 'Drizzle ORM', 'Redis', 'React Query', 'Zustand'],
+    category: 'Databases',
+    items: ['MongoDB','PostgreSQL', 'Prisma', 'Redis', 'React Query'],
   },
   {
     id: 3,
     category: '3D & Graphics',
-    items: ['Three.js', 'React Three Fiber', 'WebGL', 'Gaussian Splatting', 'GSAP', 'Framer Motion'],
+    items: ['Three.js', 'React Three Fiber', 'WebGL', 'GSAP', 'Framer Motion'],
   },
   {
     id: 4,
     category: 'UI & Styling',
-    items: ['Tailwind CSS', 'ShadCN UI', 'Radix UI', 'MUI', 'Framer Motion'],
+    items: ['Tailwind CSS', 'ShadCN UI', 'Radix UI', 'CSS', 'Framer Motion'],
   },
 ];
