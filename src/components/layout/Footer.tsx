@@ -1,75 +1,145 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { Github, Linkedin, Instagram, MessageCircle, Mail } from 'lucide-react';
-import { SITE_CONFIG, SOCIAL_LINKS } from '@/lib/constants';
-import { fadeInUp } from '@/lib/animations';
-
-const iconMap = {
-  Github,
-  Linkedin,
-  Instagram,
-  MessageCircle,
-  Mail,
-};
+import { SITE_CONFIG } from '@/lib/constants';
 
 export default function Footer() {
+  const currentTime = new Date().toLocaleTimeString('en-US', { 
+    hour: '2-digit', 
+    minute: '2-digit',
+    hour12: false,
+    timeZone: 'Asia/Kolkata'
+  });
+
   return (
-    <footer id="contact" className="relative z-10 bg-white text-black py-20 px-6 md:px-16">
-      <div className="flex flex-col md:flex-row justify-between items-start md:items-end gap-12">
-        <div>
-          <motion.h2
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true }}
-            variants={fadeInUp}
-            className="text-5xl md:text-8xl font-light tracking-tight mb-8"
-          >
-            LET&apos;S TALK
-          </motion.h2>
+    <footer className="relative z-10 bg-black text-white py-16 md:py-20 px-6 md:px-12 lg:px-16 overflow-hidden">
+      <div className="max-w-[1400px] mx-auto">
+        
+        {/* Top Grid - 4 Columns */}
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-8 mb-20">
+          
+          {/* Column 1 - Links */}
+          <div>
+            <h3 className="text-[10px] md:text-xs font-medium text-white/40 mb-6 uppercase tracking-widest">
+              LINKS
+            </h3>
+            <ul className="space-y-3">
+              {['Home', 'Work', 'About', 'Contact'].map((link) => (
+                <li key={link}>
+                  <a 
+                    href={`#${link.toLowerCase()}`}
+                    className="text-sm md:text-base text-white/70 hover:text-white transition-colors duration-300"
+                  >
+                    {link}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </div>
 
-          <motion.p
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.8, delay: 0.2 }}
-            className="text-gray-600 text-lg md:text-xl mb-8 max-w-md"
-          >
-            Have a project in mind? Let&apos;s create something extraordinary together.
-          </motion.p>
-
-          <div className="flex gap-4">
-            {SOCIAL_LINKS.map((social, index) => {
-              const Icon = iconMap[social.icon as keyof typeof iconMap];
-              return (
-                <motion.a
-                  key={social.name}
-                  href={social.href}
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.5, delay: index * 0.1 }}
-                  whileHover={{ scale: 1.1 }}
-                  className="p-4 border border-gray-300 rounded-full transition-all hover:bg-black hover:text-white"
-                  aria-label={social.name}
+          {/* Column 2 - Socials */}
+          <div>
+            <h3 className="text-[10px] md:text-xs font-medium text-white/40 mb-6 uppercase tracking-widest">
+              SOCIALS
+            </h3>
+            <ul className="space-y-3">
+              <li>
+                <a 
+                  href={`mailto:${SITE_CONFIG.email}`}
+                  className="text-sm md:text-base text-white/70 hover:text-white transition-colors duration-300"
                 >
-                  <Icon size={20} />
-                </motion.a>
-              );
-            })}
+                  Email
+                </a>
+              </li>
+              <li>
+                <a 
+                  href={SITE_CONFIG.linkedin}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-sm md:text-base text-white/70 hover:text-white transition-colors duration-300"
+                >
+                  Linkedin
+                </a>
+              </li>
+              <li>
+                <a 
+                  href={`https://wa.me/91${SITE_CONFIG.phone}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-sm md:text-base text-white/70 hover:text-white transition-colors duration-300"
+                >
+                  Whatsapp
+                </a>
+              </li>
+              <li>
+                <a 
+                  href={SITE_CONFIG.github}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-sm md:text-base text-white/70 hover:text-white transition-colors duration-300"
+                >
+                  Github
+                </a>
+              </li>
+            </ul>
+          </div>
+
+          {/* Column 3 - Local Time */}
+          <div>
+            <h3 className="text-[10px] md:text-xs font-medium text-white/40 mb-6 uppercase tracking-widest">
+              LOCAL TIME
+            </h3>
+            <p className="text-sm md:text-base text-white/70">
+              {currentTime} UTC+5:30
+            </p>
+          </div>
+
+          {/* Column 4 - Version */}
+          <div>
+            <h3 className="text-[10px] md:text-xs font-medium text-white/40 mb-6 uppercase tracking-widest">
+              VERSION
+            </h3>
+            <p className="text-sm md:text-base text-white/70">
+              {SITE_CONFIG.year} © Edition
+            </p>
           </div>
         </div>
 
+        {/* Contact Buttons - Top Right */}
+        <div className="flex flex-wrap gap-3 mb-20 justify-start md:justify-end">
+          <a
+            href={`tel:+91${SITE_CONFIG.phone}`}
+            className="px-5 py-2.5 border border-white/20 rounded-full text-sm text-white/70 hover:bg-white hover:text-black transition-all duration-300"
+          >
+            +91{SITE_CONFIG.phone}
+          </a>
+          <a
+            href={`mailto:${SITE_CONFIG.email}`}
+            className="px-5 py-2.5 border border-white/20 rounded-full text-sm text-white/70 hover:bg-white hover:text-black transition-all duration-300"
+          >
+            {SITE_CONFIG.email}
+          </a>
+        </div>
+
+        {/* Giant Name in Center */}
         <motion.div
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
+          initial={{ opacity: 0, scale: 0.9 }}
+          whileInView={{ opacity: 1, scale: 1 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.8 }}
-          className="text-gray-600 text-sm"
+          transition={{ duration: 1 }}
+          className="flex items-center justify-center mb-20"
         >
-          <p>© {SITE_CONFIG.year} {SITE_CONFIG.author}. All rights reserved.</p>
-          <p className="mt-1">Built with Next.js, Tailwind & Three.js</p>
+          <h2 className="text-[120px] md:text-[200px] lg:text-[280px] font-bold tracking-tighter leading-none text-white">
+            {SITE_CONFIG.shortName}
+          </h2>
         </motion.div>
+
+        {/* Bottom Copyright */}
+        <div className="text-center">
+          <p className="text-xs text-white/30">
+            © {SITE_CONFIG.year} {SITE_CONFIG.name}. All rights reserved.
+          </p>
+        </div>
       </div>
     </footer>
   );

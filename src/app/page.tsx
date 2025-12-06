@@ -2,7 +2,10 @@
 
 import dynamic from 'next/dynamic';
 import Hero from '@/components/ui/Hero';
+import About from '@/components/ui/About';
 import Works from '@/components/ui/Works';
+import Skills from '@/components/ui/Skills';
+import Contact from '@/components/ui/Contact';
 import Footer from '@/components/layout/Footer';
 
 // Lazy load 3D scene for better performance
@@ -17,6 +20,8 @@ export default function Home() {
       <Scene />
       <Hero />
       <Works />
+      <Skills />
+       <About />
       <Footer />
     </main>
   );

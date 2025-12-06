@@ -66,3 +66,26 @@ export const NAV_LINKS = [
   { name: 'Works', href: '#works' },
   { name: 'Contact', href: '#contact' },
 ];
+
+export const SKILLS = [
+  {
+    id: 1,
+    category: 'Languages & Frameworks',
+    items: ['TypeScript', 'JavaScript', 'React', 'Next.js', 'Node.js', 'Express.js', 'Fastify'],
+  },
+  {
+    id: 2,
+    category: 'Databases & State',
+    items: ['PostgreSQL', 'MongoDB', 'Prisma', 'Drizzle ORM', 'Redis', 'React Query', 'Zustand'],
+  },
+  {
+    id: 3,
+    category: '3D & Graphics',
+    items: ['Three.js', 'React Three Fiber', 'WebGL', 'Gaussian Splatting', 'GSAP', 'Framer Motion'],
+  },
+  {
+    id: 4,
+    category: 'UI & Styling',
+    items: ['Tailwind CSS', 'ShadCN UI', 'Radix UI', 'MUI', 'Framer Motion'],
+  },
+];
