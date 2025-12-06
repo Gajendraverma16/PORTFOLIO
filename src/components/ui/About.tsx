@@ -46,9 +46,13 @@ export default function About() {
     <>
       {[...Array(6)].map((_, i) => (
         <div key={i} className="inline-flex items-center gap-6 pr-10">
-          <span className="text-4xl md:text-6xl lg:text-7xl font-bold tracking-tight">FULL-STACK DEVELOPER UI & UX DESIGNER FULL-STACK DEVELOPER</span>
+          <span className="text-4xl md:text-6xl lg:text-7xl font-bold tracking-tight">FULL-STACK DEVELOPER </span>
           <span className="w-6 h-6 md:w-10 md:h-10 rounded-full bg-yellow-300 flex-shrink-0" />
-          <span className="text-4xl md:text-6xl lg:text-7xl font-bold tracking-tight">UI & UX DESIGNER FULL-STACK DEVELOPER UI & UX DESIGNER </span>
+          <span className="text-4xl md:text-6xl lg:text-7xl font-bold tracking-tight">UI & UX DESIGNER  </span>
+          <span className="w-6 h-6 md:w-10 md:h-10 rounded-full bg-yellow-300 flex-shrink-0" />
+          <span className="text-4xl md:text-6xl lg:text-7xl font-bold tracking-tight">FULL-STACK DEVELOPER </span>
+          <span className="w-6 h-6 md:w-10 md:h-10 rounded-full bg-yellow-300 flex-shrink-0" />
+          <span className="text-4xl md:text-6xl lg:text-7xl font-bold tracking-tight">UI & UX DESIGNER  </span>
           <span className="w-6 h-6 md:w-10 md:h-10 rounded-full bg-yellow-300 flex-shrink-0" />
         </div>
       ))}
@@ -189,9 +193,9 @@ export default function About() {
         </div>
       </div>
 
-      <div className="max-w-[1400px] mx-auto px-6 md:px-12 lg:px-16">
+      <div className="max-w-[1400px] mx-auto px-6 md:px-12 lg:px-16 w-full">
         {/* Services Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-12">
+        <div className="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8 md:gap-12">
           {services.map((service, index) => (
             <motion.div
               key={service.id}
@@ -199,7 +203,7 @@ export default function About() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: index * 0.15, duration: 0.55 }}
-              className="group relative bg-white/60 p-6 rounded-2xl"
+              className="group relative bg-white/60 p-5 sm:p-6 rounded-xl sm:rounded-2xl"
             >
               {/* Number Badge */}
               <div className="mb-4">
@@ -226,19 +230,19 @@ export default function About() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.7 }}
-          className="grid grid-cols-3 gap-8 mt-16 md:mt-24 pt-10 border-t border-black/10"
+          className="grid grid-cols-3 gap-4 sm:gap-6 md:gap-8 mt-12 sm:mt-16 md:mt-24 pt-8 sm:pt-10 border-t border-black/10"
         >
           <div className="text-center">
-            <h3 className="text-4xl md:text-5xl font-bold text-black mb-2">2+</h3>
-            <p className="text-sm md:text-base text-black/60">Years Experience</p>
+            <h3 className="text-3xl sm:text-4xl md:text-5xl font-bold text-black mb-1 sm:mb-2">2+</h3>
+            <p className="text-xs sm:text-sm md:text-base text-black/60">Years Experience</p>
           </div>
           <div className="text-center">
-            <h3 className="text-4xl md:text-5xl font-bold text-black mb-2">10+</h3>
-            <p className="text-sm md:text-base text-black/60">Projects Completed</p>
+            <h3 className="text-3xl sm:text-4xl md:text-5xl font-bold text-black mb-1 sm:mb-2">10+</h3>
+            <p className="text-xs sm:text-sm md:text-base text-black/60">Projects Completed</p>
           </div>
           <div className="text-center">
-            <h3 className="text-4xl md:text-5xl font-bold text-black mb-2">5+</h3>
-            <p className="text-sm md:text-base text-black/60">Happy Clients</p>
+            <h3 className="text-3xl sm:text-4xl md:text-5xl font-bold text-black mb-1 sm:mb-2">5+</h3>
+            <p className="text-xs sm:text-sm md:text-base text-black/60">Happy Clients</p>
           </div>
         </motion.div>
       </div>

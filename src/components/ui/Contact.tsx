@@ -28,7 +28,7 @@ export default function Contact() {
 
   return (
     <section id="contact" className="relative z-10 min-h-screen bg-white text-black py-20 md:py-32 px-6 md:px-12 lg:px-16">
-      <div className="max-w-[1400px] mx-auto">
+      <div className="max-w-[1400px] mx-auto w-full">
         
         {/* Section Title */}
         <motion.div
@@ -36,7 +36,7 @@ export default function Contact() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.8 }}
-          className="mb-16 md:mb-24"
+          className="mb-12 md:mb-16 lg:mb-24"
         >
           <div className="flex items-center gap-3 mb-4">
             <span className="w-12 h-[1px] bg-black/30"></span>
@@ -44,12 +44,12 @@ export default function Contact() {
               Get In Touch
             </p>
           </div>
-          <h2 className="text-5xl md:text-7xl lg:text-8xl font-medium tracking-tighter text-black">
+          <h2 className="text-3xl sm:text-5xl md:text-6xl lg:text-7xl font-medium tracking-tighter text-black">
             Let's Work Together
           </h2>
         </motion.div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-5 gap-12 md:gap-16">
+        <div className="grid grid-cols-1 lg:grid-cols-5 gap-8 sm:gap-10 md:gap-12 lg:gap-16">
           
           {/* Left - Contact Info */}
           <motion.div

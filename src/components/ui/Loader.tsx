@@ -44,7 +44,7 @@ export default function Loader() {
                   transition={{ duration: 0.5 }}
                   className="text-4xl md:text-5xl font-bold text-white tracking-tighter"
                 >
-                  Hello!
+                  Hello !
                 </motion.div>
               ) : (
                 <motion.div

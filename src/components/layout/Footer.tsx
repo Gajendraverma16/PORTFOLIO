@@ -57,12 +57,12 @@ export default function Footer() {
             </h3>
             <ul className="space-y-3">
               <li>
-                <a 
+                {/* <a 
                   href={`mailto:${SITE_CONFIG.email}`}
                   className="text-sm md:text-base text-white/70 hover:text-white transition-colors duration-300"
                 >
-                  Email
-                </a>
+                  gajendraverma353@gmail.com
+                </a> */}
               </li>
               <li>
                 <a 

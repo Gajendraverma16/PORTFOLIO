@@ -6,10 +6,10 @@ export const SITE_CONFIG = {
   tagline: 'Building high-performance web applications with clean UI and efficient backends.',
   description: 'Specialized in React, Next.js, Node.js, and modern web technologies',
   email: 'gajendraverma353@gmail.com',
-  phone: '9116465321',
+  phone: '9111850653',
   location: 'Chhindwara, Madhya Pradesh',
-  github: 'https://github.com',
-  linkedin: 'https://www.linkedin.com/in/gajendra-verma-b7b8b0267/',
+  github: 'https://github.com/Gajendraverma16',
+  linkedin: 'https://www.linkedin.com/in/gajendra-verma-24782a224',
   author: 'Gajendra Verma',
   year: new Date().getFullYear(),
 };
@@ -54,10 +54,10 @@ export const PROJECTS = [
 ];
 
 export const SOCIAL_LINKS = [
-  { name: 'LinkedIn', href: 'https://www.linkedin.com/in/gajendra-verma-b7b8b0267/', icon: 'Linkedin' },
-  { name: 'GitHub', href: 'https://github.com', icon: 'Github' },
-  { name: 'WhatsApp', href: 'https://wa.me/919116465321', icon: 'MessageCircle' },
-  { name: 'Instagram', href: 'https://instagram.com', icon: 'Instagram' },
+  { name: 'LinkedIn', href: 'https://www.linkedin.com/in/gajendra-verma-24782a224', icon: 'Linkedin' },
+  { name: 'GitHub', href: 'https://github.com/Gajendraverma16', icon: 'Github' },
+  { name: 'WhatsApp', href: 'https://wa.me/919111850653', icon: 'MessageCircle' },
+  { name: 'Instagram', href: 'https://www.instagram.com/gajendra.verma16', icon: 'Instagram' },
 ];
 
 export const NAV_LINKS = [
