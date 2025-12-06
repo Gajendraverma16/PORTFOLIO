@@ -1,17 +1,27 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 
 export default function Hero() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [loaderFinished, setLoaderFinished] = useState(false);
+
+  useEffect(() => {
+    // Wait for loader to finish (3 seconds)
+    const timer = setTimeout(() => {
+      setLoaderFinished(true);
+    }, 3200);
+
+    return () => clearTimeout(timer);
+  }, []);
 
   // --- Animation Variants ---
   const containerVariants = {
     hidden: { opacity: 0 },
     visible: {
       opacity: 1,
-      transition: { staggerChildren: 0.1, delayChildren: 0.3 },
+      transition: { staggerChildren: 0.1, delayChildren: loaderFinished ? 0.2 : 3.5 },
     },
   };
 
@@ -47,7 +57,12 @@ export default function Hero() {
     <section id="home" className="relative h-screen w-full flex items-center justify-center overflow-hidden text-black">
       
       {/* --- NAVBAR --- */}
-      <nav className="absolute top-0 left-0 w-full p-6 md:p-12 flex justify-between items-center z-50">
+      <motion.nav 
+        initial={{ y: -100, opacity: 0 }}
+        animate={{ y: 0, opacity: 1 }}
+        transition={{ delay: loaderFinished ? 0.2 : 3.5, duration: 0.8, ease: [0.6, 0.01, 0.05, 0.95] }}
+        className="absolute top-0 left-0 w-full p-6 md:p-12 flex justify-between items-center z-50"
+      >
         <a href="#home" className="text-2xl font-bold tracking-tighter hover:opacity-60 transition-opacity z-50 relative">
           GV.
         </a>
@@ -73,7 +88,7 @@ export default function Hero() {
              <motion.span animate={{ rotate: isMenuOpen ? -45 : 0, y: isMenuOpen ? -8 : 0 }} className="h-[2px] w-full bg-black block transition-all" />
           </div>
         </button>
-      </nav>
+      </motion.nav>
 
       {/* --- MOBILE MENU OVERLAY --- */}
       <AnimatePresence>
@@ -156,7 +171,7 @@ export default function Hero() {
         <div className="overflow-hidden">
           <motion.h1
             variants={wordVariants}
-            className="text-3xl sm:text-5xl md:text-6xl lg:text-7xl font-semibold tracking-tighter text-black leading-[1.1]"
+            className="text-3xl sm:text-5xl md:text-6xl lg:text-7xl font-medium tracking-tighter text-black leading-[1.1]"
           >
             Full-stack Developer
           </motion.h1>
@@ -172,20 +187,23 @@ export default function Hero() {
         </div>
 
         <motion.div variants={wordVariants} className="mt-8 md:mt-12">
-          <a href="#work" className="inline-block px-8 py-4 bg-black text-white rounded-full">
-            <span className="group relative overflow-hidden inline-block">
+          <a href="#work" className="group inline-flex items-center gap-2 px-8 py-4 bg-black text-white rounded-full transition-all duration-300 hover:gap-3">
+            <span className="relative overflow-hidden inline-block">
               <span className="inline-block transition-transform duration-300 group-hover:-translate-y-full text-sm font-medium">View My Work</span>
               <span className="absolute left-0 top-0 inline-block translate-y-full transition-transform duration-300 group-hover:translate-y-0 text-sm font-medium whitespace-nowrap">View My Work</span>
             </span>
+            <svg className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+            </svg>
           </a>
         </motion.div>
       </motion.div>
 
       {/* --- LEFT SIDE - SOCIAL ICONS (FIXED) --- */}
       <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ delay: 1.5, duration: 1 }}
+        initial={{ opacity: 0, x: -50 }}
+        animate={{ opacity: 1, x: 0 }}
+        transition={{ delay: loaderFinished ? 1 : 4.3, duration: 1 }}
         className="hidden lg:flex absolute left-12 top-1/2 -translate-y-1/2 flex-col gap-6 z-10"
       >
         <SocialLink href="https://linkedin.com" label="LinkedIn">
@@ -201,9 +219,9 @@ export default function Hero() {
 
       {/* --- BOTTOM SCROLL MOUSE ANIMATION (Replaces the vertical text) --- */}
       <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ delay: 2, duration: 1 }}
+        initial={{ opacity: 0, y: -20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ delay: loaderFinished ? 1.5 : 4.8, duration: 1 }}
         className="absolute bottom-8 left-1/2 -translate-x-1/2"
       >
         <div className="w-6 h-10 border-2 border-black/20 rounded-full flex justify-center p-1">
