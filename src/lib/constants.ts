@@ -36,7 +36,7 @@ export const PROJECTS = [
   {
     id: 3,
     title: 'Neverland',
-    category: 'Creative Design',
+    category: 'Web Development',
     year: '2024',
     link: 'https://gajendraverma16.github.io/Neverland/',
     image: '/projects/neverland.jpg',

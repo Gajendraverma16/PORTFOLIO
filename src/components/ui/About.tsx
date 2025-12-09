@@ -162,7 +162,7 @@ export default function About() {
   }, []);
 
   return (
-    <section id="about" className="relative z-10 bg-white text-black py-16 md:py-28 overflow-hidden">
+    <section id="about" className="relative z-10 bg-white text-black py-12 md:py-20 overflow-hidden">
       {/* Animated Line */}
       <motion.div
         className="absolute left-0 top-0 w-1 bg-yellow-300 origin-top"

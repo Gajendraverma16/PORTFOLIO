@@ -27,7 +27,7 @@ export default function Skills() {
   const [hoveredCategory, setHoveredCategory] = useState<number | null>(null);
 
   return (
-    <section id="skills" className="relative z-10 min-h-screen bg-[#f5f5f5] text-black py-20 md:py-32 px-6 md:px-12 lg:px-16">
+    <section id="skills" className="relative z-10 min-h-screen bg-[#f5f5f5] text-black py-12 md:py-20 px-6 md:px-12 lg:px-16">
       <div className="max-w-[1400px] mx-auto w-full">
         
         {/* Section Title */}

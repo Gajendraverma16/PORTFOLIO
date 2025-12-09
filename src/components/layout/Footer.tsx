@@ -39,6 +39,9 @@ const Magnetic = ({ children }: { children: React.ReactNode }) => {
 export default function Footer() {
   const [currentTime, setCurrentTime] = useState('');
   const [isMounted, setIsMounted] = useState(false);
+  const [email, setEmail] = useState('');
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitStatus, setSubmitStatus] = useState<'idle' | 'success' | 'error'>('idle');
 
   useEffect(() => {
     setIsMounted(true);
@@ -58,6 +61,44 @@ export default function Footer() {
 
     return () => clearInterval(interval);
   }, []);
+
+  const handleNewsletterSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setIsSubmitting(true);
+    setSubmitStatus('idle');
+
+    try {
+      // Using EmailJS for newsletter
+      const response = await fetch('https://api.emailjs.com/api/v1.0/email/send', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          service_id: 'service_kzwv33e',
+          template_id: 'template_ystx71q',
+          user_id: 'G85ZqlPfPHlZYBBVg',
+          template_params: {
+            from_email: email,
+            to_email: SITE_CONFIG.email,
+          },
+        }),
+      });
+
+      if (response.ok) {
+        setSubmitStatus('success');
+        setEmail('');
+        setTimeout(() => setSubmitStatus('idle'), 5000);
+      } else {
+        setSubmitStatus('error');
+      }
+    } catch (error) {
+      console.error('Error subscribing:', error);
+      setSubmitStatus('error');
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
 
   return (
     <footer className="relative z-10 bg-black text-white py-16 md:py-20 px-6 md:px-12 lg:px-16 overflow-hidden">
@@ -228,21 +269,58 @@ export default function Footer() {
         >
           <h3 className="text-2xl md:text-3xl font-semibold mb-4">Stay Updated</h3>
           <p className="text-white/60 mb-6">Get notified about new projects and articles</p>
-          <form className="flex flex-col sm:flex-row gap-3 max-w-md mx-auto">
+          <form onSubmit={handleNewsletterSubmit} className="flex flex-col sm:flex-row gap-3 max-w-md mx-auto">
             <input
               type="email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
               placeholder="Enter your email"
-              className="flex-1 px-6 py-3 bg-white/10 border border-white/20 rounded-full text-white placeholder:text-white/40 focus:outline-none focus:border-white/40 transition-colors"
+              required
+              disabled={isSubmitting}
+              className="flex-1 px-6 py-3 bg-white/10 border border-white/20 rounded-full text-white placeholder:text-white/40 focus:outline-none focus:border-white/40 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
             />
             <motion.button
               type="submit"
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              className="px-8 py-3 bg-white text-black rounded-full font-medium hover:bg-white/90 transition-colors"
+              disabled={isSubmitting}
+              whileHover={{ scale: isSubmitting ? 1 : 1.05 }}
+              whileTap={{ scale: isSubmitting ? 1 : 0.95 }}
+              className={`px-8 py-3 rounded-full font-medium transition-colors ${
+                isSubmitting
+                  ? 'bg-white/50 text-black/50 cursor-not-allowed'
+                  : submitStatus === 'success'
+                  ? 'bg-green-500 text-white'
+                  : submitStatus === 'error'
+                  ? 'bg-red-500 text-white'
+                  : 'bg-white text-black hover:bg-white/90'
+              }`}
             >
-              Subscribe
+              {isSubmitting
+                ? 'Subscribing...'
+                : submitStatus === 'success'
+                ? '✓ Subscribed!'
+                : submitStatus === 'error'
+                ? 'Try Again'
+                : 'Subscribe'}
             </motion.button>
           </form>
+          {submitStatus === 'success' && (
+            <motion.p
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              className="text-sm text-green-400 mt-3"
+            >
+              Thanks for subscribing! Check your email.
+            </motion.p>
+          )}
+          {submitStatus === 'error' && (
+            <motion.p
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              className="text-sm text-red-400 mt-3"
+            >
+              Oops! Something went wrong. Please try again.
+            </motion.p>
+          )}
         </motion.div>
 
         {/* Giant Name in Center */}

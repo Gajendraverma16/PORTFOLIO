@@ -28,7 +28,7 @@ export default function Works() {
   const [hoveredId, setHoveredId] = useState<number | null>(null);
 
   return (
-    <section id="work" className="relative z-10 min-h-screen bg-white text-black py-20 md:py-32 px-6 md:px-12 lg:px-16">
+    <section id="work" className="relative z-10 min-h-screen bg-white text-black py-12 md:py-20 px-6 md:px-12 lg:px-16">
       <div className="max-w-[1400px] mx-auto w-full">
         
         {/* Section Title */}
